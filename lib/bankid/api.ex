@@ -1,4 +1,4 @@
-defmodule BankID do
+defmodule BankID.API do
   @moduledoc """
   Documentation for BankID.
   """
@@ -47,7 +47,7 @@ defmodule BankID do
   def collect(order_ref) do
     Requests.encode_collect(order_ref)
     |> make_certified_request("/collect")
-    |> check_ok()
+    |> check_ok_or_error()
     |> Requests.decode_collect()
     |> IO.inspect()
   end
