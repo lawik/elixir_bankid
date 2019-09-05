@@ -30,7 +30,7 @@ defmodule BankID.Requests do
           }
       end
 
-    to_charlist(Jason.encode!(request))
+    Jason.encode!(request)
   end
 
   def decode_auth(response) do
@@ -92,7 +92,7 @@ defmodule BankID.Requests do
           Map.put_new(request, "requirement", requirement)
       end
 
-    to_charlist(Jason.encode!(request))
+    Jason.encode!(request)
   end
 
   def decode_sign(response) do
@@ -102,7 +102,7 @@ defmodule BankID.Requests do
   def encode_cancel(order_ref) do
     request = %{"orderRef" => order_ref}
 
-    to_charlist(Jason.encode!(request))
+    Jason.encode!(request)
   end
 
   def decode_cancel(response) do
@@ -112,7 +112,7 @@ defmodule BankID.Requests do
   def encode_collect(order_ref) do
     request = %{"orderRef" => order_ref}
 
-    to_charlist(Jason.encode!(request))
+    Jason.encode!(request)
   end
 
   def decode_collect(response) do

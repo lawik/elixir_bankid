@@ -2,14 +2,19 @@ defmodule BankID do
   use GenServer
 
   # 2 seconds
-  @poll_time 2000
+
+  @poll_time Application.get_env(:bankid, :poll_time, 2000)
 
   # Stupid simple authentication, non-interactive, blocking
-  def authenticate(end_user_ip, personal_number, requirement \\ nil) do
+  def authenticate(end_user_ip, personal_number, requirement \\ nil, opts \\ []) do
     parent = self()
 
     {:ok, _pid} =
-      GenServer.start_link(BankID, {:auth, parent, end_user_ip, personal_number, requirement})
+      GenServer.start_link(
+        BankID,
+        {:auth, parent, end_user_ip, personal_number, requirement},
+        opts
+      )
 
     receive do
       {:response, response} ->
@@ -23,7 +28,8 @@ defmodule BankID do
         user_visible_data,
         personal_number,
         user_non_visible_data \\ nil,
-        requirement \\ nil
+        requirement \\ nil,
+        opts \\ []
       ) do
     parent = self()
 
@@ -31,7 +37,8 @@ defmodule BankID do
       GenServer.start_link(
         BankID,
         {:sign, parent, end_user_ip, user_visible_data, user_non_visible_data, personal_number,
-         requirement}
+         requirement},
+        opts
       )
 
     receive do
