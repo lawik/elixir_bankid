@@ -3,6 +3,7 @@ defmodule BankIDTest do
   doctest BankID
 
   test "simplified authenticate" do
+    IO.puts("Please identify yourself in the BankID testing app.")
     response = BankID.authenticate("127.0.0.1", "198405157879")
 
     assert %{
@@ -24,6 +25,7 @@ defmodule BankIDTest do
   end
 
   test "simplified signing" do
+    IO.puts("Please identify yourself in the BankID testing app.")
     response = BankID.sign("127.0.0.1", "signing test", "198405157879")
 
     assert %{

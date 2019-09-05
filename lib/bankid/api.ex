@@ -13,7 +13,6 @@ defmodule BankID.API do
     |> make_certified_request("/auth")
     |> check_ok()
     |> Requests.decode_auth()
-    |> IO.inspect()
   end
 
   def sign(
@@ -33,7 +32,6 @@ defmodule BankID.API do
     |> make_certified_request("/sign")
     |> check_ok()
     |> Requests.decode_sign()
-    |> IO.inspect()
   end
 
   def cancel(order_ref) do
@@ -41,7 +39,6 @@ defmodule BankID.API do
     |> make_certified_request("/cancel")
     |> check_ok_or_error()
     |> Requests.decode_cancel()
-    |> IO.inspect()
   end
 
   def collect(order_ref) do
@@ -49,11 +46,9 @@ defmodule BankID.API do
     |> make_certified_request("/collect")
     |> check_ok_or_error()
     |> Requests.decode_collect()
-    |> IO.inspect()
   end
 
   defp check_ok({:ok, response}) do
-    IO.inspect(response)
     response
   end
 
@@ -89,17 +84,11 @@ defmodule BankID.API do
     ssl_options = [
       {:cacertfile, '/Users/lawik/projects/bankid/ca_cert.cer'},
       {:certfile, '/Users/lawik/projects/bankid/ssl_cert.pem'}
-      # {:versions, ['tlsv1.2']}
     ]
 
     http_options = [{:ssl, ssl_options}]
     url = base_url ++ to_charlist(path)
-    IO.puts(url)
-    # request_body = '{"endUserIp"}'
-
-    # {:ok, {{'HTTP/1.1', status_code, _}, _headers, response_body}}
     request = {url, [], 'application/json', data}
-    IO.inspect(request)
 
     {:ok, {{'HTTP/1.1', status_code, _}, _headers, response_body}} =
       response =
