@@ -1,21 +1,5 @@
 # BankID
 
-**TODO: Add description**
+Basic implementation of the Swedish national identity bank ID API as an Elixir client.
 
-## Installation
-
-If [available in Hex](https://hex.pm/docs/publish), the package can be installed
-by adding `bankid` to your list of dependencies in `mix.exs`:
-
-```elixir
-def deps do
-  [
-    {:bankid, "~> 0.1.0"}
-  ]
-end
-```
-
-Documentation can be generated with [ExDoc](https://github.com/elixir-lang/ex_doc)
-and published on [HexDocs](https://hexdocs.pm). Once published, the docs can
-be found at [https://hexdocs.pm/bankid](https://hexdocs.pm/bankid).
-
+Use only for reference, not maintained.
